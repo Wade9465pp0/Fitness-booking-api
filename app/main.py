@@ -25,10 +25,14 @@ def book(request: BookingRequest):
 
 @app.get("/bookings")
 def bookings(email: str = Query(..., description="Client email to fetch bookings")):
-    logger.info(f"Fetching bookings for email: {email}")
-    bookings = get_bookings_by_email(email)
-    logger.info(f"Found {len(bookings)} bookings for {email}")
-    return bookings
+    try:
+        logger.info(f"Fetching bookings for email: {email}")
+        bookings = get_bookings_by_email(email)
+        logger.info(f"Found {len(bookings)} bookings for {email}")
+        return bookings
+    except ValueError as ve:
+        logger.error(f"Error fetching bookings for {email}: {ve}")
+        raise HTTPException(status_code=400, detail=str(ve))    
 
 @app.get("/classes")
 def list_classes(tz: str = Query("Asia/Kolkata", description="Timezone to convert class times to")):
