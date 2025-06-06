@@ -5,12 +5,23 @@ A FastAPI backend for managing fitness class bookings.
 ## 🔧 Setup
 
 ```bash
+Clone the repo
 git clone https://github.com/yourusername/fitness-booking-api.git
+
+Go to project directory
 cd fitness-booking-api
+
+Install the requirements
 pip install -r requirements.txt
+
+Create the virtual environment
+python -m venv venv
+
+Activate the venv
+.venv\Scripts\activate
+
+Run the server
 uvicorn app.main:app --reload
-
-
 
 Curl Commands
 
